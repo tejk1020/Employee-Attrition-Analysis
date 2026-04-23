@@ -101,4 +101,4 @@ This project demonstrates how combining predictive modeling with visualization h
 ## Author
 
 ### Tej Kadam
-### GitHub: [https://github.com/yourusername](https://github.com/tejk1020)
+### GitHub: [https://github.com/tejk1020](https://github.com/tejk1020)
