@@ -1,15 +1,13 @@
 # 1. Load Libraries
+library(ggplot2)
+library(dplyr)
 library(caret)
 library(randomForest)
 
 # 2. Load Dataset
-data <- read.csv("D:/HR Analytics Attriction (Raw Data).csv", stringsAsFactors = FALSE)
+data <- read.csv("D://HR Analytics Attriction (Raw Data).csv", stringsAsFactors = FALSE)
 
-# 3. Basic Inspection
-str(data)
-summary(data)
-
-# 4. Data Cleaning
+# 3. Data Cleaning
 # Remove useless columns
 data$EmployeeNumber <- NULL
 data$Over18 <- NULL
@@ -23,8 +21,30 @@ data$Attrition <- ifelse(data$Attrition == "Yes", 1, 0)
 data[] <- lapply(data, function(x) {
   if(is.character(x)) as.factor(x) else x
 })
+
 # Remove missing values
 data <- na.omit(data)
+
+# 4. Exploratory Data Analysis
+# Attrition distribution
+ggplot(data, aes(x = factor(Attrition))) +
+  geom_bar(fill = "steelblue") +
+  labs(title = "Attrition Distribution", x = "Attrition (0 = No, 1 = Yes)", y = "Count")
+
+# Salary vs Attrition
+ggplot(data, aes(x = MonthlyIncome, fill = factor(Attrition))) +
+  geom_histogram(binwidth = 2000, alpha = 0.6, position = "identity") +
+  labs(title = "Monthly Income vs Attrition")
+
+# Age vs Attrition
+ggplot(data, aes(x = Age, fill = factor(Attrition))) +
+  geom_histogram(binwidth = 5, alpha = 0.6, position = "identity") +
+  labs(title = "Age vs Attrition")
+
+# Overtime vs Attrition
+ggplot(data, aes(x = OverTime, fill = factor(Attrition))) +
+  geom_bar(position = "dodge") +
+  labs(title = "Overtime vs Attrition")
 
 # 5. Train-Test Split
 set.seed(123)
@@ -53,7 +73,10 @@ confusionMatrix(as.factor(pred_log), as.factor(test$Attrition))
 cat("Random Forest")
 confusionMatrix(pred_rf, as.factor(test$Attrition))
 
-# 9. Export Predictions (FOR TABLEAU / POWER BI)
+# 9. Feature Importance
+varImpPlot(model_rf)
+
+# 10. Export Predictions (FOR TABLEAU / POWER BI)
 # Add predictions to test data
 test$Predicted_Attrition <- pred_rf
 
@@ -61,4 +84,4 @@ test$Predicted_Attrition <- pred_rf
 test$Risk_Level <- ifelse(test$Predicted_Attrition == 1, "High Risk", "Low Risk")
 
 # Save file
-write.csv(test, "D://attrition_predictions (Cleaned Data).csv", row.names = FALSE)
+write.csv(test, "D:/attrition_predictions.csv", row.names = FALSE)
