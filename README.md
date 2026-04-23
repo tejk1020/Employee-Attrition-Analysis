@@ -16,6 +16,13 @@ Employee attrition leads to increased hiring costs and productivity loss. The go
 * **R** → Data preprocessing, EDA, and model building
 * **Tableau** → Interactive dashboard
 
+## Libraries used
+
+* ggplot2
+* dplyr
+* caret
+* randomForest
+
 ## Data Analysis (R)
 
 Key steps performed:
@@ -37,16 +44,14 @@ Key steps performed:
 
 A classification model was built to predict attrition.
 
-* **Model Used:** Logistic Regression / Random Forest
+* **Model Used:** Logistic Regression & Random Forest
 * **Target Variable:** Attrition (0 = No, 1 = Yes)
 
 ### Evaluation Metrics
 
 * **Logistic Regression (Accuracy):** *0.898*
 * **Random Forest (Accuracy):** *0.8605*
-* ROC curve used to evaluate classification performance
 
-Recall is prioritized to correctly identify employees likely to leave.
 ## Visualizations (R)
 ### Attrition distribution 
 <img width="600" height="400" alt="Attrition Distribution" src="https://github.com/user-attachments/assets/bb6643ab-6983-458d-bcc8-edfb131c143a" />
