@@ -13,8 +13,8 @@ Employee attrition leads to increased hiring costs and productivity loss. The go
 
 ## Tools Used
 
-* **R** → Data preprocessing, EDA, and model building
-* **Tableau** → Interactive dashboard
+* **R** : Data preprocessing, EDA, and model building
+* **Tableau** : Interactive dashboard
 
 ## Libraries used
 
